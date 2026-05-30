@@ -240,11 +240,14 @@ let pinTarget=null,refreshInterval=null,refreshCountdown=15;
 function showView(name){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   const el=document.getElementById('view-'+name);
-  if(el)el.classList.add('active');
+  if(!el)return;
+  el.classList.add('active');
   if(name==='scores')startRefresh();else stopRefresh();
-  if(name==='stats')renderStats();
-  if(name==='config')renderConfig();
-  if(name==='saisie')initSaisie();
+  setTimeout(()=>{
+    if(name==='stats')renderStats();
+    if(name==='config')renderConfig();
+    if(name==='saisie')initSaisie();
+  },50);
 }
 function showPinOverlay(target){pinTarget=target;document.getElementById('pin-overlay-label').textContent=target==='config'?'Accès config':'Afficher les scores';document.getElementById('pin-input').value='';document.getElementById('pin-overlay').classList.add('show');setTimeout(()=>document.getElementById('pin-input').focus(),100);}
 function hidePinOverlay(){document.getElementById('pin-overlay').classList.remove('show');pinTarget=null;}
