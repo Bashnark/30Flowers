@@ -186,7 +186,7 @@ select option{background:#1a1916}
 .player-chip .rm:hover{opacity:1}
 
 /* PIN overlay */
-.pin-overlay{position:fixed;inset:0;background:rgba(15,14,12,.95);display:flex;align-items:center;justify-content:center;z-index:1000;display:none}
+.pin-overlay{position:fixed;inset:0;background:rgba(15,14,12,.95);align-items:center;justify-content:center;z-index:1000;display:none}
 .pin-overlay.show{display:flex}
 .pin-box{background:var(--surface);border:0.5px solid var(--border2);border-radius:20px;padding:32px 28px;width:300px;text-align:center}
 .pin-box h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px}
@@ -201,7 +201,10 @@ select option{background:#1a1916}
 <div id="view-saisie" class="view active">
   <div class="topbar">
     <span class="topbar-title">🌸 30 ans d'Emma</span>
-    <button class="topbar-lock" onclick="showPinOverlay('scores')">📊 Scores</button>
+    <div style="display:flex;gap:6px">
+      <button class="topbar-lock" onclick="showPinOverlay('scores')">📊 Scores</button>
+      <button class="topbar-lock" onclick="showPinOverlay('config')">⚙️</button>
+    </div>
   </div>
   <div class="wrap">
     <div class="hero">
@@ -345,10 +348,10 @@ const GAMES = {
   "Mölkky":            {pts:3, scoreType:"score",     emoji:"🪵", desc:"3 pts gagnant · Renseigner le score"},
   "Ping-pong":         {pts:1, scoreType:"score",     emoji:"🏓", desc:"1 pt · Match en 11 pts"},
   "Billard":           {pts:3, scoreType:"billard",   emoji:"🎱", desc:"3 pts gagnant · Boule noire rentrée par adv = 2 pts"},
-  "Billard hollandais":{pts:2, scoreType:"score",     emoji:"🎰", desc:"2 pts gagnant · Renseigner le score"},
+  "Billard hollandais":{pts:2, scoreType:"score",     emoji:"🔵", desc:"2 pts gagnant · Renseigner le score"},
   "Cornhole":          {pts:3, scoreType:"score",     emoji:"🕳️",  desc:"3 pts gagnant dès 21 pts"},
-  "Table élastique":   {pts:1, scoreType:"manches",   emoji:"🪤", manches:2, desc:"1 pt · 2 manches gagnantes"},
-  "Palet breton":      {pts:2, scoreType:"score",     emoji:"🧿", desc:"2 pts gagnant · Renseigner le score"},
+  "Table élastique":   {pts:1, scoreType:"manches",   emoji:"🏸", manches:2, desc:"1 pt · 2 manches gagnantes"},
+  "Palet breton":      {pts:2, scoreType:"score",     emoji:"💿", desc:"2 pts gagnant · Renseigner le score"},
   "L'île au trésor":   {pts:2, scoreType:"choix",     emoji:"🗺️",  desc:"2 pts gagnant"},
   "Le bon barman":     {pts:2, scoreType:"score",     emoji:"🍹", desc:"2 pts gagnant · Match en 21 pts"},
   "Pierre qui coule":  {pts:1, scoreType:"manches",   emoji:"🪨", manches:2, desc:"1 pt · 2 manches gagnantes"},
@@ -360,7 +363,7 @@ const GAMES = {
 let state = {
   pin: "2006",
   teams: [
-    {id:1, name:"Rose",   color:"#D4537E", emoji:"🦄", players:[]},
+    {id:1, name:"Rose",   color:"#D4537E", emoji:"🌸", players:[]},
     {id:2, name:"Vert",   color:"#52a830", emoji:"🐍", players:[]},
     {id:3, name:"Bleu",   color:"#378ADD", emoji:"🐬", players:[]},
     {id:4, name:"Orange", color:"#E8821A", emoji:"🦁", players:[]},
@@ -1065,10 +1068,6 @@ load();
 initSaisie();
 handleUrl();
 
-// Add config/stats access from topbar (hidden buttons via pin)
-document.querySelector('.topbar').insertAdjacentHTML('beforeend',
-  `<button class="topbar-lock" onclick="showPinOverlay('config')" style="margin-left:6px">⚙️</button>`
-);
 </script>
 </body>
 </html>
