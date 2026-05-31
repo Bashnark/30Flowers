@@ -235,15 +235,7 @@ function allPlayers(){const a=[];state.teams.forEach(t=>(t.players||[]).forEach(
 function myTeam(){return me?getTeamByPlayer(me):null;}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._to);t._to=setTimeout(()=>t.classList.remove('show'),2500);}
 let pinTarget=null,refreshInterval=null,refreshCountdown=15;
-function showView(name){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  const el=document.getElementById('view-'+name);
-  if(el)el.classList.add('active');
-  if(name==='scores')startRefresh();else stopRefresh();
-  if(name==='stats')renderStats();
-  if(name==='config')renderConfig();
-  if(name==='saisie')initSaisie();
-}
+function showView(name){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const el=document.getElementById('view-'+name);if(el)el.classList.add('active');if(name==='scores')startRefresh();else stopRefresh();if(name==='stats')setTimeout(renderStats,100);if(name==='config')setTimeout(renderConfig,100);if(name==='saisie')setTimeout(initSaisie,100);}
 function showPinOverlay(target){pinTarget=target;document.getElementById('pin-overlay-label').textContent=target==='config'?'Accès config':'Afficher les scores';document.getElementById('pin-input').value='';document.getElementById('pin-overlay').classList.add('show');setTimeout(()=>document.getElementById('pin-input').focus(),100);}
 function hidePinOverlay(){document.getElementById('pin-overlay').classList.remove('show');pinTarget=null;}
 function onPinKey(e){if(e.key==='Enter')checkPin();}
