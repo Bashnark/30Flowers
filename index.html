@@ -339,7 +339,7 @@ function renderStats(){
   const sortedTeams=[...state.teams].sort((a,b)=>(state.scores[b.id]||0)-(state.scores[a.id]||0));
   const ranks=['🥇','🥈','🥉','4️⃣','5️⃣'];
   sortedTeams.forEach((team,i)=>{
-    const pts=state.scores[team.id]||0;const players=team.players||[];
+    const pts=state.scores[String(team.id)]||state.scores[team.id]||0;const players=team.players||[];
     const pStar=[...players].sort((a,b)=>(state.playerStats[b]?.wins||0)-(state.playerStats[a]?.wins||0));const star=pStar[0];
     const pBoulet=[...players].sort((a,b)=>(state.playerStats[b]?.losses||0)-(state.playerStats[a]?.losses||0));const bouletT=pBoulet[0];
     let note='';
